@@ -1,5 +1,5 @@
 #include "NetwBase.h"
-//
+
 // #define DEBUG
  
 void NetwBase::loopTxReset(){

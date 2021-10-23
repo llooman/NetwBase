@@ -6,8 +6,6 @@
  *
  * */
 
-// commments
-
 #include "Arduino.h"
 #include <inttypes.h>
 #include <EEPROM.h>
