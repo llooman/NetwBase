@@ -328,6 +328,13 @@ void NetwBase::txCommit()
 	}
 }
 
+/*
+	pass through upload rxMsg to a send txMsg for sending to the next parent:
+	- use deltaMillis to calc the millis from node startup. (the send logic can than calc a new deltaMillis at the moment of forwarding to parent) 
+	- the connId is not needed because it will be replaced by this nodeId.
+
+    new name: rx2TxFifo
+*/
 int NetwBase::putTxBuf(RxItem *rxItem)  // false when full
 {
 	unsigned long timeStamp = millis() - (rxItem->data.msg.deltaMillis * 100);
@@ -376,12 +383,13 @@ int NetwBase::putTxBuf(byte cmd, int node, byte id, long val, unsigned long time
 }
 
 
-
+// writeFromTxFiFo
 int NetwBase::writeTxBuf() // opt: 0=all, 1=val, 2=cmd
 {
 	RxData rxData;
 
-	if( nodeId<1 || txFiFo[txBufOut].data.msg.id == 0 )
+	// if( nodeId<1 || txFiFo[txBufOut].data.msg.id == 0 )
+	if( nodeId<1 )
 	{
 		#ifdef DEBUG
 			Serial.println("twSnd: nodeId<1");

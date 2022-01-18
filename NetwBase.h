@@ -54,7 +54,11 @@
 
 
 #define NETW_RX_BUF_CNT    	7
-#define NETW_TX_BUF_CNT    	7
+
+#ifndef NETW_TX_BUF_CNT
+	#define NETW_TX_BUF_CNT    	7
+#endif
+
 
 #define NETW_MESH_TABLE_SIZE 12
 #define NETW_MESH_TABLE_KEEPALIVE 24500L  // milliseconds
